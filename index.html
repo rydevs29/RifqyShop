@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RifqyShop - Store Terpercaya</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --accent: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Card Style */
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            text-align: center;
+            background-color: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .btn-buy {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: #25D366; /* Warna WA */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-buy:hover {
+            background-color: #128C7E;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .container { padding: 0 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>RifqyShop</h1>
+        <p>Solusi Digital Murah & Terpercaya</p>
+    </header>
+
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: var(--secondary);">Layanan Kami</h2>
+        
+        <div class="product-grid">
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">📱</span>
+                    <h3 class="product-title">Aplikasi Mod VIP</h3>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1rem; color: #64748b;">Aplikasi premium dengan fitur terbuka semua.</p>
+                    <ul class="features">
+                        <li>Bebas Iklan (No Ads)</li>
+                        <li>Fitur Premium Unlocked</li>
+                        <li>Support Android Terbaru</li>
+                        <li>Garansi Instalasi</li>
+                    </ul>
+                    <span class="price">Rp 25.000 <span style="font-size: 0.8rem; color: #64748b;">/ App</span></span>
+                    <button class="btn-buy" onclick="beliViaWA('Aplikasi Mod VIP')">
+                        Beli Sekarang ➜
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">💎</span>
+                    <h3 class="product-title">Akun Premium</h3>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1rem; color: #64748b;">Akun resmi bergaransi untuk hiburan & kerja.</p>
+                    <ul class="features">
+                        <li>Canva Pro / Spotify / Netflix</li>
+                        <li>Akun Private / Sharing</li>
+                        <li>Full Garansi</li>
+                        <li>Proses Cepat</li>
+                    </ul>
+                    <span class="price">Mulai Rp 15.000</span>
+                    <button class="btn-buy" onclick="beliViaWA('Akun Premium (Canva/Netflix/Spotify)')">
+                        Beli Sekarang ➜
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">💻</span>
+                    <h3 class="product-title">Jasa Pembuatan Website</h3>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1rem; color: #64748b;">Website profesional untuk personal atau bisnis.</p>
+                    <ul class="features">
+                        <li>Landing Page / Portofolio</li>
+                        <li>Desain Responsif (HP/PC)</li>
+                        <li>Gratis Hosting (GitHub Pages)</li>
+                        <li>Revisi Tampilan</li>
+                    </ul>
+                    <span class="price">Mulai Rp 150.000</span>
+                    <button class="btn-buy" onclick="beliViaWA('Jasa Pembuatan Website')">
+                        Konsultasi Sekarang ➜
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 RifqyShop. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function beliViaWA(produk) {
+            // Nomor telepon (format internasional tanpa +)
+            const nomor = "6287759652715";
+            
+            // Pesan otomatis
+            const pesan = `Halo RifqyShop, saya tertarik untuk membeli/memesan *${produk}*. Bisa info detailnya?`;
+            
+            // Encode pesan agar aman di URL
+            const url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+            
+            // Buka di tab baru
+            window.open(url, '_blank');
+        }
+    </script>
+
+</body>
+</html>
