@@ -2,317 +2,126 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RifqyShop - Top Up Game & Voucher</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --accent: #ff0055;
-            --bg-dark: #050510;
-            --card-bg: rgba(20, 20, 40, 0.6);
-            --text-light: #ffffff;
-            --glass: rgba(255, 255, 255, 0.05);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding-bottom: 2rem;
-        }
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(to bottom, #020012, #0a0a2e);
-        }
-
-        /* Header */
-        header { text-align: center; padding: 3rem 1rem 1rem; }
-        header h1 {
-            font-size: 3rem; font-weight: 800;
-            background: linear-gradient(to right, #00f2fe, #ff0055);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-transform: uppercase; letter-spacing: 2px;
-            filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.3));
-        }
-        header p { color: #a0a0c0; }
-
-        /* Search */
-        .search-container { max-width: 600px; margin: 2rem auto; padding: 0 1.5rem; }
-        .search-input {
-            width: 100%; padding: 1rem 2rem; border-radius: 50px;
-            border: 2px solid rgba(79, 172, 254, 0.3);
-            background: rgba(0, 0, 0, 0.5); color: white;
-            font-size: 1rem; backdrop-filter: blur(10px); outline: none; transition: 0.3s;
-        }
-        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
-
-        /* Grid */
-        .container { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; }
-        .game-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1.5rem; margin-bottom: 4rem;
-        }
-
-        /* Card */
-        .card {
-            background: var(--card-bg); border-radius: 15px; overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.3s;
-            backdrop-filter: blur(5px); position: relative;
-        }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .card-img-wrapper { height: 120px; overflow: hidden; }
-        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .card:hover .card-img { transform: scale(1.1); }
-        .card-body { padding: 1rem; text-align: center; }
-        .game-title { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.2rem; }
-        .game-pub { font-size: 0.75rem; color: #888; margin-bottom: 0.8rem; }
-        .btn-topup {
-            display: block; width: 100%; padding: 0.6rem; cursor: pointer;
-            background: linear-gradient(90deg, var(--secondary), var(--primary));
-            color: #000; font-weight: 700; border-radius: 6px; font-size: 0.85rem; transition: 0.2s;
-        }
-        .btn-topup:hover { filter: brightness(1.1); }
-
-        /* --- POPUP MODAL (New Feature) --- */
-        .modal-overlay {
-            display: none; /* Hidden by default */
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
-            z-index: 9999; justify-content: center; align-items: center;
-            opacity: 0; transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active { display: flex; opacity: 1; }
-
-        .modal-box {
-            background: #0f0f24; border: 1px solid var(--primary);
-            width: 90%; max-width: 450px; border-radius: 20px; padding: 2rem;
-            position: relative; box-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
-            transform: scale(0.8); transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.active .modal-box { transform: scale(1); }
-
-        .modal-close {
-            position: absolute; top: 15px; right: 20px; font-size: 1.5rem;
-            color: #fff; cursor: pointer; transition: 0.3s;
-        }
-        .modal-close:hover { color: var(--accent); }
-
-        .modal-title {
-            text-align: center; font-size: 1.5rem; margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        
-        .modal-subtitle {
-            text-align: center; font-size: 0.9rem; color: #888; margin-bottom: 1.5rem;
-        }
-
-        .payment-list {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-        }
-
-        .pay-item {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1rem; border-radius: 12px; cursor: pointer;
-            display: flex; align-items: center; gap: 10px; transition: 0.3s;
-        }
-
-        .pay-item:hover {
-            background: rgba(0, 242, 254, 0.1); border-color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        .pay-item i { font-size: 1.5rem; width: 30px; text-align: center; }
-        .pay-item span { font-weight: 600; font-size: 0.9rem; }
-
-        /* Icon Colors */
-        .fa-qrcode { color: #fff; }
-        .fa-wallet { color: #118EEA; }
-        .fa-money-bill-wave { color: #00AA13; }
-        .fa-credit-card { color: #4C3494; }
-        .fa-bag-shopping { color: #EE4D2D; }
-        .fa-building-columns { color: #005E9C; }
-        .fa-store { color: #DA291C; }
-
-        footer { text-align: center; padding: 2rem; color: #666; font-size: 0.8rem; margin-top: 2rem; }
-
-        @media (max-width: 600px) {
-            .game-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-            header h1 { font-size: 2.2rem; }
-            .payment-list { grid-template-columns: 1fr; }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RifqyTranslatePro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-black text-white h-dvh w-full flex flex-col overflow-hidden" onclick="closeAllDropdowns(event)">
 
-    <div id="particles-js"></div>
-
-    <header>
-        <h1>RIFQYSHOP</h1>
-        <p>Top Up Game Cepat, Aman & Terpercaya</p>
-    </header>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="Mau Top Up apa hari ini?..." onkeyup="filterGames()">
+    <div class="shrink-0 h-[60px] px-4 bg-black/90 backdrop-blur border-b border-white/10 flex justify-between items-center z-50">
+        <h1 class="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-orange-500 tracking-wide">
+            RifqyTranslate<span class="text-white text-[10px] align-top ml-1 border border-white/20 px-1 rounded bg-white/10">PRO</span>
+        </h1>
+        <button onclick="toggleSettings()" class="p-2 rounded-full hover:bg-white/10 transition text-slate-400 hover:text-white" title="Pengaturan">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        </button>
     </div>
 
-    <div class="container">
-        <div class="game-grid" id="gameGrid"></div>
-        <div id="noResult" style="display:none; text-align:center; color:#888;">Game tidak ditemukan...</div>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 RifqyShop. All rights reserved.</p>
-    </footer>
-
-    <div class="modal-overlay" id="paymentModal">
-        <div class="modal-box">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <h3 class="modal-title" id="modalGameTitle">Pilih Pembayaran</h3>
-            <p class="modal-subtitle">Mau bayar pakai apa boss?</p>
-            
-            <div class="payment-list">
-                <div class="pay-item" onclick="processPayment('QRIS')">
-                    <i class="fa-solid fa-qrcode"></i> <span>QRIS (All Pay)</span>
+    <main class="flex-grow relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 to-black">
+        
+        <section id="tab-text" class="w-full h-full flex flex-col p-4 overflow-y-auto no-scrollbar">
+            <div class="max-w-2xl w-full mx-auto space-y-4">
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 shadow-lg backdrop-blur-sm">
+                    <div class="flex justify-between mb-2"><span class="text-xs font-bold text-slate-400">INPUT</span><span class="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded">Auto Detect</span></div>
+                    <textarea id="txtInput" class="w-full bg-transparent outline-none text-lg resize-none min-h-[100px]" placeholder="Ketik teks..."></textarea>
                 </div>
-                <div class="pay-item" onclick="processPayment('DANA')">
-                    <i class="fa-solid fa-wallet"></i> <span>DANA</span>
+                <div class="flex justify-center"><div class="p-2 rounded-full bg-white/5 border border-white/10"><svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m7 7V3"></path></svg></div></div>
+                <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-4 shadow-lg relative min-h-[150px]">
+                    <div class="flex justify-between items-center mb-2 z-20">
+                        <div class="relative w-48">
+                            <button id="btnTxtTgt" onclick="toggleDD('ddTxtTgt')" class="w-full bg-black/50 border border-white/20 rounded-lg px-3 py-1.5 text-sm text-left flex justify-between items-center hover:bg-white/10 transition"><span id="lblTxtTgt">English</span><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                            <div id="ddTxtTgt" class="hidden absolute top-full left-0 mt-1 w-64 bg-[#151515] border border-white/20 rounded-xl shadow-2xl z-50 overflow-hidden"><div class="p-2 border-b border-white/10"><input type="text" id="srcTxtTgt" class="w-full bg-black border border-white/10 rounded px-2 py-1 text-xs text-white" placeholder="Cari..." onkeyup="filterLang('srcTxtTgt','lstTxtTgt')"></div><ul id="lstTxtTgt" class="custom-dropdown max-h-60 overflow-y-auto p-1"></ul></div>
+                            <input type="hidden" id="valTxtTgt">
+                        </div>
+                        <div id="badgeTxt" class="hidden text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">Google</div>
+                    </div>
+                    <div class="relative flex-grow">
+                        <textarea id="txtOutput" readonly class="w-full h-full bg-transparent outline-none text-lg resize-none text-purple-100" placeholder=""></textarea>
+                        <div id="loaderTxt" class="hidden absolute inset-0 flex items-center justify-center"><span class="typing-indicator"><span></span><span></span><span></span></span></div>
+                    </div>
+                    <div class="flex justify-end gap-2 mt-2 pt-2 border-t border-white/5">
+                        <button onclick="speak('txtOutput', 'valTxtTgt')" class="p-2 hover:text-purple-400 text-slate-400 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg></button>
+                        <button onclick="copyText('txtOutput')" class="p-2 hover:text-blue-400 text-slate-400 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg></button>
+                    </div>
                 </div>
-                <div class="pay-item" onclick="processPayment('GoPay')">
-                    <i class="fa-solid fa-money-bill-wave"></i> <span>GoPay</span>
-                </div>
-                <div class="pay-item" onclick="processPayment('OVO')">
-                    <i class="fa-solid fa-credit-card"></i> <span>OVO</span>
-                </div>
-                <div class="pay-item" onclick="processPayment('ShopeePay')">
-                    <i class="fa-solid fa-bag-shopping"></i> <span>ShopeePay</span>
-                </div>
-                <div class="pay-item" onclick="processPayment('Transfer Bank')">
-                    <i class="fa-solid fa-building-columns"></i> <span>Bank Transfer</span>
-                </div>
-                <div class="pay-item" onclick="processPayment('Alfamart/Indomaret')">
-                    <i class="fa-solid fa-store"></i> <span>Alfamart/Indo</span>
-                </div>
+                <button onclick="runTranslate()" class="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">TERJEMAHKAN</button>
             </div>
+        </section>
+
+        <section id="tab-voice" class="hidden w-full h-full flex-col md:flex-row">
+            <div class="flex-1 bg-slate-900 border-r border-white/10 flex flex-col relative overflow-hidden">
+                <div class="p-3 bg-slate-900/90 z-20 flex flex-col h-[70px]">
+                    <div class="flex items-center gap-2 mb-1"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span><span class="text-[10px] text-blue-400 font-bold">SAYA</span></div>
+                    <div class="relative w-full"><button id="btnVA" onclick="toggleDD('ddVA')" class="w-full text-left text-sm font-semibold flex justify-between bg-white/5 border border-white/10 rounded px-2 py-1"><span id="lblVA">Indo</span><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button><div id="ddVA" class="hidden absolute top-full left-0 mt-1 w-64 bg-[#151515] border border-white/20 rounded-xl shadow-2xl z-50 overflow-hidden"><div class="p-2 border-b border-white/10"><input type="text" id="srcVA" class="w-full bg-black border border-white/10 rounded text-xs px-2 py-1 text-white" onkeyup="filterLang('srcVA','lstVA')"></div><ul id="lstVA" class="custom-dropdown max-h-60 overflow-y-auto p-1"></ul></div><input type="hidden" id="valVA"></div>
+                </div>
+                <div class="flex-1 flex flex-col items-center justify-center p-4 text-center overflow-y-auto no-scrollbar"><p id="voiceTextA" class="text-2xl font-bold text-white">...</p><p id="trVA" class="text-blue-300 italic mt-2"></p></div>
+                <div class="h-[80px] flex justify-center items-center"><button id="micA" onclick="startMic('A')" class="w-14 h-14 rounded-full bg-slate-800 border border-blue-500/30 flex justify-center items-center text-blue-400 shadow-lg active:scale-95 transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg></button></div>
+            </div>
+            <div class="flex-1 bg-black flex flex-col relative overflow-hidden">
+                <div class="p-3 bg-black/90 z-20 flex flex-col h-[70px] items-end">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[10px] text-orange-400 font-bold">LAWAN</span><span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span></div>
+                    <div class="relative w-full"><button id="btnVB" onclick="toggleDD('ddVB')" class="w-full text-right text-sm font-semibold flex justify-between flex-row-reverse bg-white/5 border border-white/10 rounded px-2 py-1"><span id="lblVB">English</span><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button><div id="ddVB" class="hidden absolute top-full right-0 mt-1 w-64 bg-[#151515] border border-white/20 rounded-xl shadow-2xl z-50 overflow-hidden"><div class="p-2 border-b border-white/10"><input type="text" id="srcVB" class="w-full bg-black border border-white/10 rounded text-xs px-2 py-1 text-white" onkeyup="filterLang('srcVB','lstVB')"></div><ul id="lstVB" class="custom-dropdown max-h-60 overflow-y-auto p-1"></ul></div><input type="hidden" id="valVB"></div>
+                </div>
+                <div class="flex-1 flex flex-col items-center justify-center p-4 text-center overflow-y-auto no-scrollbar"><p id="voiceTextB" class="text-2xl font-bold text-white">...</p><p id="trVB" class="text-orange-300 italic mt-2"></p></div>
+                <div class="h-[80px] flex justify-center items-center"><button id="micB" onclick="startMic('B')" class="w-14 h-14 rounded-full bg-slate-900 border border-orange-500/30 flex justify-center items-center text-orange-400 shadow-lg active:scale-95 transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg></button></div>
+            </div>
+            <div id="vStatus" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/70 px-3 py-1 rounded-full text-[10px] pointer-events-none opacity-0 transition">Mendengarkan...</div>
+        </section>
+
+        <section id="tab-img" class="hidden w-full h-full flex flex-col p-6 items-center overflow-y-auto">
+            <div class="max-w-xl w-full space-y-6">
+                <div class="border-2 border-dashed border-white/20 rounded-2xl p-8 text-center hover:border-blue-500/50 transition cursor-pointer" onclick="document.getElementById('fileIn').click()">
+                    <svg class="w-12 h-12 mx-auto text-slate-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <p class="text-slate-400">Klik untuk upload <br><span class="text-xs text-slate-500">Gambar (.png, .jpg) atau Teks (.txt)</span></p>
+                    <input type="file" id="fileIn" class="hidden" accept="image/*,.txt" onchange="handleFile()">
+                </div>
+                
+                <div id="ocrRes" class="hidden bg-slate-900 border border-white/10 rounded-2xl p-4 w-full">
+                    <h3 class="text-xs font-bold text-blue-400 mb-2">HASIL SCAN:</h3>
+                    <p id="extractedText" class="text-sm text-white mb-4 italic p-2 bg-black/20 rounded">...</p>
+                    <button onclick="transferToText()" class="w-full py-2 bg-blue-600/20 border border-blue-500/50 text-blue-400 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition">TERJEMAHKAN HASIL INI</button>
+                </div>
+                <div id="ocrLoad" class="hidden text-center"><span class="animate-spin inline-block w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full"></span><p class="text-xs mt-2 text-slate-500">Memproses Gambar...</p></div>
+            </div>
+        </section>
+
+        <section id="tab-hist" class="hidden w-full h-full p-4 overflow-y-auto">
+            <div class="max-w-2xl w-full mx-auto">
+                <div class="flex justify-between items-center mb-4"><h2 class="font-bold text-slate-400 text-sm">RIWAYAT TERAKHIR</h2><button onclick="clearHist()" class="text-[10px] text-red-400 border border-red-400/30 px-2 py-1 rounded hover:bg-red-400/10">HAPUS SEMUA</button></div>
+                <div id="histList" class="space-y-3"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="shrink-0 h-[65px] bg-black border-t border-white/10 flex justify-around items-center z-50 shadow-[0_-5px_15px_rgba(0,0,0,0.5)]">
+        <button onclick="goTab('text')" id="nav-text" class="flex flex-col items-center gap-1 text-blue-500"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg><span class="text-[9px] font-bold">TEKS</span></button>
+        <button onclick="goTab('voice')" id="nav-voice" class="flex flex-col items-center gap-1 text-slate-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg><span class="text-[9px] font-bold">SUARA</span></button>
+        <button onclick="goTab('img')" id="nav-img" class="flex flex-col items-center gap-1 text-slate-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><span class="text-[9px] font-bold">SCAN</span></button>
+        <button onclick="goTab('hist')" id="nav-hist" class="flex flex-col items-center gap-1 text-slate-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="text-[9px] font-bold">RIWAYAT</span></button>
+    </nav>
+
+    <div id="modalSet" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-6 backdrop-blur-sm">
+        <div class="bg-[#151515] w-full max-w-sm rounded-2xl border border-white/20 p-6 shadow-2xl">
+            <h3 class="text-lg font-bold mb-4 text-white">Pengaturan Suara</h3>
+            
+            <label class="text-xs text-slate-400 block mb-2">Jenis Suara (Tergantung Browser)</label>
+            <select id="setVoice" class="w-full bg-black border border-white/10 rounded px-2 py-2 text-sm text-white mb-4 outline-none"></select>
+
+            <label class="text-xs text-slate-400 block mb-1">Kecepatan: <span id="valRate">1.0</span>x</label>
+            <input type="range" id="setRate" min="0.5" max="2" step="0.1" value="1" class="w-full accent-blue-500 mb-4" oninput="document.getElementById('valRate').innerText=this.value">
+
+            <label class="text-xs text-slate-400 block mb-1">Nada (Pitch): <span id="valPitch">1.0</span></label>
+            <input type="range" id="setPitch" min="0.5" max="2" step="0.1" value="1" class="w-full accent-purple-500 mb-6" oninput="document.getElementById('valPitch').innerText=this.value">
+
+            <button onclick="toggleSettings()" class="w-full py-3 bg-white/10 rounded-xl font-bold text-white hover:bg-white/20 transition">TUTUP</button>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // DATA GAME
-        const games = [
-            { name: "Mobile Legends", pub: "Moonton", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=60" },
-            { name: "Free Fire", pub: "Garena", img: "https://images.unsplash.com/photo-1533230689972-7472c91834e5?auto=format&fit=crop&w=400&q=60" },
-            { name: "PUBG Mobile", pub: "Tencent", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=400&q=60" },
-            { name: "Genshin Impact", pub: "HoYoverse", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=400&q=60" },
-            { name: "Valorant", pub: "Riot Games", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=60" },
-            { name: "Roblox", pub: "Roblox Corp", img: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&w=400&q=60" },
-            { name: "Call of Duty Mobile", pub: "Activision", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=60" },
-            { name: "Higgs Domino", pub: "Higgs Games", img: "https://images.unsplash.com/photo-1596838132731-3301c3fd4317?auto=format&fit=crop&w=400&q=60" },
-            { name: "Honor of Kings", pub: "Level Infinite", img: "https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=400&q=60" },
-            { name: "Steam Wallet", pub: "Valve", img: "https://images.unsplash.com/photo-1612287232817-60f8f6a52418?auto=format&fit=crop&w=400&q=60" },
-            { name: "Google Play", pub: "Google", img: "https://images.unsplash.com/photo-1551651767-d59af5d3b664?auto=format&fit=crop&w=400&q=60" },
-            { name: "Netflix Premium", pub: "Streaming", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=400&q=60" }
-        ];
-
-        const grid = document.getElementById('gameGrid');
-        
-        // Variable untuk menyimpan game yang sedang dipilih
-        let selectedGame = "";
-
-        function renderGames(data) {
-            grid.innerHTML = '';
-            data.forEach(game => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="card-img-wrapper">
-                        <img src="${game.img}" alt="${game.name}" class="card-img">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="game-title">${game.name}</h3>
-                        <p class="game-pub">${game.pub}</p>
-                        <div onclick="openModal('${game.name}')" class="btn-topup">🔥 TOP UP</div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-            document.getElementById('noResult').style.display = data.length ? 'none' : 'block';
-        }
-
-        renderGames(games);
-
-        function filterGames() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = games.filter(g => g.name.toLowerCase().includes(input));
-            renderGames(filtered);
-        }
-
-        // --- MODAL LOGIC ---
-        const modal = document.getElementById('paymentModal');
-        const modalTitle = document.getElementById('modalGameTitle');
-
-        function openModal(gameName) {
-            selectedGame = gameName; // Simpan nama game
-            modalTitle.innerText = "Top Up " + gameName; // Ubah judul modal
-            modal.classList.add('active'); // Tampilkan modal
-        }
-
-        function closeModal() {
-            modal.classList.remove('active'); // Sembunyikan modal
-        }
-
-        // Tutup modal jika klik di luar kotak
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) closeModal();
-        });
-
-        // --- PROSES KE WHATSAPP ---
-        function processPayment(method) {
-            const phone = "6287759652715";
-            
-            // Format pesan yang dikirim ke WA
-            const message = `Halo RifqyShop!\n\nSaya mau Top Up: *${selectedGame}*\nPembayaran via: *${method}*\n\nMohon info list harganya ya min!`;
-            
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-            
-            // Buka WA dan tutup modal
-            window.open(url, '_blank');
-            closeModal();
-        }
-
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 50 },
-                "color": { "value": "#00f2fe" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#4facfe", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 1.5 }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" } }
-            }
-        });
-    </script>
+    <script src="languages.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
