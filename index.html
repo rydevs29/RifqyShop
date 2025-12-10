@@ -42,202 +42,121 @@
         }
 
         /* Header */
-        header {
-            text-align: center;
-            padding: 3rem 1rem 1rem;
-        }
-
+        header { text-align: center; padding: 3rem 1rem 1rem; }
         header h1 {
-            font-size: 3rem;
-            font-weight: 800;
+            font-size: 3rem; font-weight: 800;
             background: linear-gradient(to right, #00f2fe, #ff0055);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-transform: uppercase; letter-spacing: 2px;
             filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.3));
-            margin-bottom: 5px;
         }
-
         header p { color: #a0a0c0; }
 
         /* Search */
-        .search-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-
+        .search-container { max-width: 600px; margin: 2rem auto; padding: 0 1.5rem; }
         .search-input {
-            width: 100%;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            width: 100%; padding: 1rem 2rem; border-radius: 50px;
             border: 2px solid rgba(79, 172, 254, 0.3);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-size: 1rem;
-            backdrop-filter: blur(10px);
-            outline: none;
-            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.5); color: white;
+            font-size: 1rem; backdrop-filter: blur(10px); outline: none; transition: 0.3s;
         }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
 
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
-        }
-
-        /* Container & Grid */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-        }
-
+        /* Grid */
+        .container { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; }
         .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 4rem;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem; margin-bottom: 4rem;
         }
 
         /* Card */
         .card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
-            backdrop-filter: blur(5px);
-            position: relative;
+            background: var(--card-bg); border-radius: 15px; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.3s;
+            backdrop-filter: blur(5px); position: relative;
         }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 5px 20px rgba(0, 242, 254, 0.15);
-        }
-
-        .card-img-wrapper {
-            height: 120px;
-            overflow: hidden;
-        }
-
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.5s;
-        }
-
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .card-img-wrapper { height: 120px; overflow: hidden; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .card:hover .card-img { transform: scale(1.1); }
-
-        .card-body {
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .game-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-            color: #fff;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .game-pub {
-            font-size: 0.75rem;
-            color: #888;
-            margin-bottom: 0.8rem;
-        }
-
+        .card-body { padding: 1rem; text-align: center; }
+        .game-title { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.2rem; }
+        .game-pub { font-size: 0.75rem; color: #888; margin-bottom: 0.8rem; }
         .btn-topup {
-            display: block;
-            width: 100%;
-            padding: 0.6rem;
+            display: block; width: 100%; padding: 0.6rem; cursor: pointer;
             background: linear-gradient(90deg, var(--secondary), var(--primary));
-            color: #000;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            transition: 0.2s;
+            color: #000; font-weight: 700; border-radius: 6px; font-size: 0.85rem; transition: 0.2s;
         }
-
         .btn-topup:hover { filter: brightness(1.1); }
 
-        /* --- NEW: PAYMENT SECTION --- */
-        .payment-section {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 2rem;
-            backdrop-filter: blur(10px);
+        /* --- POPUP MODAL (New Feature) --- */
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+            z-index: 9999; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s ease;
         }
 
-        .section-header {
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
+        .modal-overlay.active { display: flex; opacity: 1; }
+
+        .modal-box {
+            background: #0f0f24; border: 1px solid var(--primary);
+            width: 90%; max-width: 450px; border-radius: 20px; padding: 2rem;
+            position: relative; box-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
+            transform: scale(0.8); transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-box { transform: scale(1); }
+
+        .modal-close {
+            position: absolute; top: 15px; right: 20px; font-size: 1.5rem;
+            color: #fff; cursor: pointer; transition: 0.3s;
+        }
+        .modal-close:hover { color: var(--accent); }
+
+        .modal-title {
+            text-align: center; font-size: 1.5rem; margin-bottom: 0.5rem;
             color: var(--primary);
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        }
+        
+        .modal-subtitle {
+            text-align: center; font-size: 0.9rem; color: #888; margin-bottom: 1.5rem;
         }
 
-        .payment-logos {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+        .payment-list {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
         }
 
-        .pay-badge {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 0.8rem 1.5rem;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
-            border: 1px solid transparent;
-            cursor: default;
+        .pay-item {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem; border-radius: 12px; cursor: pointer;
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
         }
 
-        .pay-badge:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--primary);
-            transform: scale(1.05);
+        .pay-item:hover {
+            background: rgba(0, 242, 254, 0.1); border-color: var(--primary);
+            transform: translateX(5px);
         }
 
-        .pay-badge i { font-size: 1.2rem; }
-        .pay-badge span { font-weight: 600; font-size: 0.9rem; }
+        .pay-item i { font-size: 1.5rem; width: 30px; text-align: center; }
+        .pay-item span { font-weight: 600; font-size: 0.9rem; }
 
-        /* Warna Icon Payment */
-        .fa-qrcode { color: #fff; } /* QRIS */
-        .fa-wallet { color: #4facfe; } /* DANA */
-        .fa-money-bill-wave { color: #00c853; } /* GoPay */
-        .fa-credit-card { color: #aa00ff; } /* OVO */
-        .fa-building-columns { color: #ff6f00; } /* Bank */
-        .fa-store { color: #f44336; } /* Alfamart */
+        /* Icon Colors */
+        .fa-qrcode { color: #fff; }
+        .fa-wallet { color: #118EEA; }
+        .fa-money-bill-wave { color: #00AA13; }
+        .fa-credit-card { color: #4C3494; }
+        .fa-bag-shopping { color: #EE4D2D; }
+        .fa-building-columns { color: #005E9C; }
+        .fa-store { color: #DA291C; }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-            font-size: 0.8rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
+        footer { text-align: center; padding: 2rem; color: #666; font-size: 0.8rem; margin-top: 2rem; }
 
         @media (max-width: 600px) {
             .game-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
             header h1 { font-size: 2.2rem; }
-            .payment-logos { gap: 0.5rem; }
-            .pay-badge { padding: 0.6rem 1rem; font-size: 0.8rem; }
+            .payment-list { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -257,50 +176,47 @@
     <div class="container">
         <div class="game-grid" id="gameGrid"></div>
         <div id="noResult" style="display:none; text-align:center; color:#888;">Game tidak ditemukan...</div>
-
-        <div class="payment-section">
-            <h3 class="section-header">Metode Pembayaran Tersedia</h3>
-            <div class="payment-logos">
-                <div class="pay-badge" title="Scan QRIS">
-                    <i class="fa-solid fa-qrcode"></i>
-                    <span>QRIS (All Payment)</span>
-                </div>
-                <div class="pay-badge" title="DANA">
-                    <i class="fa-solid fa-wallet" style="color:#118EEA"></i>
-                    <span>DANA</span>
-                </div>
-                <div class="pay-badge" title="GoPay">
-                    <i class="fa-solid fa-money-bill-wave" style="color:#00AA13"></i>
-                    <span>GoPay</span>
-                </div>
-                <div class="pay-badge" title="OVO">
-                    <i class="fa-solid fa-credit-card" style="color:#4C3494"></i>
-                    <span>OVO</span>
-                </div>
-                <div class="pay-badge" title="ShopeePay">
-                    <i class="fa-solid fa-bag-shopping" style="color:#EE4D2D"></i>
-                    <span>ShopeePay</span>
-                </div>
-                <div class="pay-badge" title="Transfer Bank">
-                    <i class="fa-solid fa-building-columns" style="color:#005E9C"></i>
-                    <span>BCA / BRI / Mandiri</span>
-                </div>
-                <div class="pay-badge" title="Minimarket">
-                    <i class="fa-solid fa-store" style="color:#DA291C"></i>
-                    <span>Alfamart / Indomaret</span>
-                </div>
-            </div>
-            <p style="margin-top: 1rem; font-size: 0.8rem; color: #888;">*Pembayaran dilakukan manual via Chat WhatsApp Admin</p>
-        </div>
     </div>
 
     <footer>
         <p>&copy; 2025 RifqyShop. All rights reserved.</p>
     </footer>
 
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-box">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h3 class="modal-title" id="modalGameTitle">Pilih Pembayaran</h3>
+            <p class="modal-subtitle">Mau bayar pakai apa boss?</p>
+            
+            <div class="payment-list">
+                <div class="pay-item" onclick="processPayment('QRIS')">
+                    <i class="fa-solid fa-qrcode"></i> <span>QRIS (All Pay)</span>
+                </div>
+                <div class="pay-item" onclick="processPayment('DANA')">
+                    <i class="fa-solid fa-wallet"></i> <span>DANA</span>
+                </div>
+                <div class="pay-item" onclick="processPayment('GoPay')">
+                    <i class="fa-solid fa-money-bill-wave"></i> <span>GoPay</span>
+                </div>
+                <div class="pay-item" onclick="processPayment('OVO')">
+                    <i class="fa-solid fa-credit-card"></i> <span>OVO</span>
+                </div>
+                <div class="pay-item" onclick="processPayment('ShopeePay')">
+                    <i class="fa-solid fa-bag-shopping"></i> <span>ShopeePay</span>
+                </div>
+                <div class="pay-item" onclick="processPayment('Transfer Bank')">
+                    <i class="fa-solid fa-building-columns"></i> <span>Bank Transfer</span>
+                </div>
+                <div class="pay-item" onclick="processPayment('Alfamart/Indomaret')">
+                    <i class="fa-solid fa-store"></i> <span>Alfamart/Indo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // DATA GAME - Tambah game di sini
+        // DATA GAME
         const games = [
             { name: "Mobile Legends", pub: "Moonton", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=60" },
             { name: "Free Fire", pub: "Garena", img: "https://images.unsplash.com/photo-1533230689972-7472c91834e5?auto=format&fit=crop&w=400&q=60" },
@@ -313,13 +229,14 @@
             { name: "Honor of Kings", pub: "Level Infinite", img: "https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=400&q=60" },
             { name: "Steam Wallet", pub: "Valve", img: "https://images.unsplash.com/photo-1612287232817-60f8f6a52418?auto=format&fit=crop&w=400&q=60" },
             { name: "Google Play", pub: "Google", img: "https://images.unsplash.com/photo-1551651767-d59af5d3b664?auto=format&fit=crop&w=400&q=60" },
-            { name: "Netflix", pub: "Streaming", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=400&q=60" },
-            { name: "Spotify Premium", pub: "Music", img: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?auto=format&fit=crop&w=400&q=60" },
-            { name: "Joki Rank MLBB", pub: "Services", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=60" }
+            { name: "Netflix Premium", pub: "Streaming", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=400&q=60" }
         ];
 
         const grid = document.getElementById('gameGrid');
         
+        // Variable untuk menyimpan game yang sedang dipilih
+        let selectedGame = "";
+
         function renderGames(data) {
             grid.innerHTML = '';
             data.forEach(game => {
@@ -332,7 +249,7 @@
                     <div class="card-body">
                         <h3 class="game-title">${game.name}</h3>
                         <p class="game-pub">${game.pub}</p>
-                        <a href="javascript:void(0)" onclick="orderWA('${game.name}')" class="btn-topup">🔥 TOP UP</a>
+                        <div onclick="openModal('${game.name}')" class="btn-topup">🔥 TOP UP</div>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -348,10 +265,37 @@
             renderGames(filtered);
         }
 
-        function orderWA(game) {
+        // --- MODAL LOGIC ---
+        const modal = document.getElementById('paymentModal');
+        const modalTitle = document.getElementById('modalGameTitle');
+
+        function openModal(gameName) {
+            selectedGame = gameName; // Simpan nama game
+            modalTitle.innerText = "Top Up " + gameName; // Ubah judul modal
+            modal.classList.add('active'); // Tampilkan modal
+        }
+
+        function closeModal() {
+            modal.classList.remove('active'); // Sembunyikan modal
+        }
+
+        // Tutup modal jika klik di luar kotak
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+
+        // --- PROSES KE WHATSAPP ---
+        function processPayment(method) {
             const phone = "6287759652715";
-            const msg = `Halo RifqyShop, saya mau order/topup *${game}*. Bagaimana list harganya?`;
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+            
+            // Format pesan yang dikirim ke WA
+            const message = `Halo RifqyShop!\n\nSaya mau Top Up: *${selectedGame}*\nPembayaran via: *${method}*\n\nMohon info list harganya ya min!`;
+            
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            
+            // Buka WA dan tutup modal
+            window.open(url, '_blank');
+            closeModal();
         }
 
         particlesJS("particles-js", {
