@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RifqyShop - Top Up Game Termurah</title>
+    <title>RifqyShop - Top Up Game & Voucher</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary: #00f2fe;
@@ -13,6 +15,7 @@
             --bg-dark: #050510;
             --card-bg: rgba(20, 20, 40, 0.6);
             --text-light: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
         * {
@@ -27,9 +30,9 @@
             color: var(--text-light);
             min-height: 100vh;
             overflow-x: hidden;
+            padding-bottom: 2rem;
         }
 
-        /* Background Animation Wrapper */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -42,7 +45,6 @@
         header {
             text-align: center;
             padding: 3rem 1rem 1rem;
-            position: relative;
         }
 
         header h1 {
@@ -52,27 +54,23 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
-            margin-bottom: 10px;
+            letter-spacing: 2px;
+            filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.3));
+            margin-bottom: 5px;
         }
 
-        header p {
-            color: #a0a0c0;
-            font-size: 1.1rem;
-        }
+        header p { color: #a0a0c0; }
 
-        /* Search Bar */
+        /* Search */
         .search-container {
             max-width: 600px;
             margin: 2rem auto;
             padding: 0 1.5rem;
-            position: relative;
         }
 
         .search-input {
             width: 100%;
-            padding: 1.2rem 2rem;
+            padding: 1rem 2rem;
             border-radius: 50px;
             border: 2px solid rgba(79, 172, 254, 0.3);
             background: rgba(0, 0, 0, 0.5);
@@ -81,131 +79,165 @@
             backdrop-filter: blur(10px);
             outline: none;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
         }
 
         .search-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
-            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
         }
 
-        /* Grid Container */
+        /* Container & Grid */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem 2rem;
         }
 
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
         }
 
-        /* Game Card */
+        /* Card */
         .card {
             background: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            transition: 0.3s;
             backdrop-filter: blur(5px);
-            display: flex;
-            flex-direction: column;
+            position: relative;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 242, 254, 0.15);
         }
 
         .card-img-wrapper {
-            width: 100%;
-            height: 150px;
+            height: 120px;
             overflow: hidden;
-            position: relative;
         }
 
         .card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: 0.5s;
         }
 
-        .card:hover .card-img {
-            transform: scale(1.1);
-        }
+        .card:hover .card-img { transform: scale(1.1); }
 
         .card-body {
-            padding: 1.5rem;
+            padding: 1rem;
             text-align: center;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
 
         .game-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
             color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .game-publisher {
-            font-size: 0.8rem;
+        .game-pub {
+            font-size: 0.75rem;
             color: #888;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .btn-topup {
             display: block;
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.6rem;
             background: linear-gradient(90deg, var(--secondary), var(--primary));
             color: #000;
-            font-weight: 800;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 8px;
-            transition: 0.3s;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: 0.2s;
         }
 
-        .btn-topup:hover {
-            filter: brightness(1.2);
-            box-shadow: 0 0 15px var(--primary);
+        .btn-topup:hover { filter: brightness(1.1); }
+
+        /* --- NEW: PAYMENT SECTION --- */
+        .payment-section {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
         }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .payment-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .pay-badge {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+            cursor: default;
+        }
+
+        .pay-badge:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pay-badge i { font-size: 1.2rem; }
+        .pay-badge span { font-weight: 600; font-size: 0.9rem; }
+
+        /* Warna Icon Payment */
+        .fa-qrcode { color: #fff; } /* QRIS */
+        .fa-wallet { color: #4facfe; } /* DANA */
+        .fa-money-bill-wave { color: #00c853; } /* GoPay */
+        .fa-credit-card { color: #aa00ff; } /* OVO */
+        .fa-building-columns { color: #ff6f00; } /* Bank */
+        .fa-store { color: #f44336; } /* Alfamart */
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 3rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Not Found Message */
-        .no-result {
-            grid-column: 1 / -1;
-            text-align: center;
             padding: 2rem;
-            color: #888;
-            display: none;
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         @media (max-width: 600px) {
-            .game-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-            .card-img-wrapper { height: 100px; }
-            .card-body { padding: 1rem; }
-            .game-title { font-size: 0.9rem; }
-            .btn-topup { font-size: 0.7rem; padding: 0.6rem; }
-            header h1 { font-size: 2rem; }
+            .game-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            header h1 { font-size: 2.2rem; }
+            .payment-logos { gap: 0.5rem; }
+            .pay-badge { padding: 0.6rem 1rem; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -215,17 +247,51 @@
 
     <header>
         <h1>RIFQYSHOP</h1>
-        <p>Solusi Top Up Game & Voucher Resmi</p>
+        <p>Top Up Game Cepat, Aman & Terpercaya</p>
     </header>
 
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="Cari game favoritmu (Mobile Legends, FF...)" onkeyup="filterGames()">
+        <input type="text" id="searchInput" class="search-input" placeholder="Mau Top Up apa hari ini?..." onkeyup="filterGames()">
     </div>
 
     <div class="container">
-        <div class="game-grid" id="gameGrid">
+        <div class="game-grid" id="gameGrid"></div>
+        <div id="noResult" style="display:none; text-align:center; color:#888;">Game tidak ditemukan...</div>
+
+        <div class="payment-section">
+            <h3 class="section-header">Metode Pembayaran Tersedia</h3>
+            <div class="payment-logos">
+                <div class="pay-badge" title="Scan QRIS">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <span>QRIS (All Payment)</span>
+                </div>
+                <div class="pay-badge" title="DANA">
+                    <i class="fa-solid fa-wallet" style="color:#118EEA"></i>
+                    <span>DANA</span>
+                </div>
+                <div class="pay-badge" title="GoPay">
+                    <i class="fa-solid fa-money-bill-wave" style="color:#00AA13"></i>
+                    <span>GoPay</span>
+                </div>
+                <div class="pay-badge" title="OVO">
+                    <i class="fa-solid fa-credit-card" style="color:#4C3494"></i>
+                    <span>OVO</span>
+                </div>
+                <div class="pay-badge" title="ShopeePay">
+                    <i class="fa-solid fa-bag-shopping" style="color:#EE4D2D"></i>
+                    <span>ShopeePay</span>
+                </div>
+                <div class="pay-badge" title="Transfer Bank">
+                    <i class="fa-solid fa-building-columns" style="color:#005E9C"></i>
+                    <span>BCA / BRI / Mandiri</span>
+                </div>
+                <div class="pay-badge" title="Minimarket">
+                    <i class="fa-solid fa-store" style="color:#DA291C"></i>
+                    <span>Alfamart / Indomaret</span>
+                </div>
             </div>
-        <div id="noResult" class="no-result">Game tidak ditemukan boss...</div>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: #888;">*Pembayaran dilakukan manual via Chat WhatsApp Admin</p>
+        </div>
     </div>
 
     <footer>
@@ -234,26 +300,24 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // --- DATA GAME (TAMBAH GAME DISINI) ---
-        // Kamu bisa tambah game sebanyak-banyaknya di dalam daftar ini
-        // Gambar menggunakan placeholder dari Unsplash dengan keyword gaming
-        
+        // DATA GAME - Tambah game di sini
         const games = [
-            { name: "Mobile Legends", pub: "Moonton", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=60" },
-            { name: "Free Fire", pub: "Garena", img: "https://images.unsplash.com/photo-1533230689972-7472c91834e5?auto=format&fit=crop&w=500&q=60" },
-            { name: "PUBG Mobile", pub: "Tencent", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=500&q=60" },
-            { name: "Genshin Impact", pub: "HoYoverse", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=500&q=60" },
-            { name: "Valorant", pub: "Riot Games", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=60" },
-            { name: "Roblox", pub: "Roblox Corp", img: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&w=500&q=60" },
-            { name: "Call of Duty Mobile", pub: "Activision", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=60" },
-            { name: "Higgs Domino", pub: "Higgs Games", img: "https://images.unsplash.com/photo-1596838132731-3301c3fd4317?auto=format&fit=crop&w=500&q=60" },
-            { name: "Honor of Kings", pub: "Level Infinite", img: "https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=500&q=60" },
-            { name: "Steam Wallet", pub: "Valve", img: "https://images.unsplash.com/photo-1612287232817-60f8f6a52418?auto=format&fit=crop&w=500&q=60" },
-            { name: "Google Play", pub: "Google", img: "https://images.unsplash.com/photo-1551651767-d59af5d3b664?auto=format&fit=crop&w=500&q=60" },
-            { name: "Netflix Premium", pub: "Streaming", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=500&q=60" }
+            { name: "Mobile Legends", pub: "Moonton", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=60" },
+            { name: "Free Fire", pub: "Garena", img: "https://images.unsplash.com/photo-1533230689972-7472c91834e5?auto=format&fit=crop&w=400&q=60" },
+            { name: "PUBG Mobile", pub: "Tencent", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=400&q=60" },
+            { name: "Genshin Impact", pub: "HoYoverse", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=400&q=60" },
+            { name: "Valorant", pub: "Riot Games", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=60" },
+            { name: "Roblox", pub: "Roblox Corp", img: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&w=400&q=60" },
+            { name: "Call of Duty Mobile", pub: "Activision", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=60" },
+            { name: "Higgs Domino", pub: "Higgs Games", img: "https://images.unsplash.com/photo-1596838132731-3301c3fd4317?auto=format&fit=crop&w=400&q=60" },
+            { name: "Honor of Kings", pub: "Level Infinite", img: "https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=400&q=60" },
+            { name: "Steam Wallet", pub: "Valve", img: "https://images.unsplash.com/photo-1612287232817-60f8f6a52418?auto=format&fit=crop&w=400&q=60" },
+            { name: "Google Play", pub: "Google", img: "https://images.unsplash.com/photo-1551651767-d59af5d3b664?auto=format&fit=crop&w=400&q=60" },
+            { name: "Netflix", pub: "Streaming", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=400&q=60" },
+            { name: "Spotify Premium", pub: "Music", img: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?auto=format&fit=crop&w=400&q=60" },
+            { name: "Joki Rank MLBB", pub: "Services", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=60" }
         ];
 
-        // --- RENDER GAME CARDS ---
         const grid = document.getElementById('gameGrid');
         
         function renderGames(data) {
@@ -266,63 +330,43 @@
                         <img src="${game.img}" alt="${game.name}" class="card-img">
                     </div>
                     <div class="card-body">
-                        <div>
-                            <h3 class="game-title">${game.name}</h3>
-                            <p class="game-publisher">${game.pub}</p>
-                        </div>
-                        <a href="javascript:void(0)" onclick="orderWA('${game.name}')" class="btn-topup">Top Up</a>
+                        <h3 class="game-title">${game.name}</h3>
+                        <p class="game-pub">${game.pub}</p>
+                        <a href="javascript:void(0)" onclick="orderWA('${game.name}')" class="btn-topup">🔥 TOP UP</a>
                     </div>
                 `;
                 grid.appendChild(card);
             });
-
-            if(data.length === 0) {
-                document.getElementById('noResult').style.display = 'block';
-            } else {
-                document.getElementById('noResult').style.display = 'none';
-            }
+            document.getElementById('noResult').style.display = data.length ? 'none' : 'block';
         }
 
-        // Render awal semua game
         renderGames(games);
 
-        // --- FUNGSI SEARCH ---
         function filterGames() {
             const input = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = games.filter(game => game.name.toLowerCase().includes(input));
+            const filtered = games.filter(g => g.name.toLowerCase().includes(input));
             renderGames(filtered);
         }
 
-        // --- FUNGSI WHATSAPP ---
-        function orderWA(gameName) {
-            const nomor = "6287759652715";
-            const pesan = `Halo RifqyShop, saya mau Top Up *${gameName}*. Boleh lihat daftar harganya?`;
-            window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`, '_blank');
+        function orderWA(game) {
+            const phone = "6287759652715";
+            const msg = `Halo RifqyShop, saya mau order/topup *${game}*. Bagaimana list harganya?`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // --- KONFIGURASI PARTIKEL (EFEK KEREN) ---
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 60 },
+                "number": { "value": 50 },
                 "color": { "value": "#00f2fe" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.5, "random": true },
                 "size": { "value": 3, "random": true },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#4facfe",
-                    "opacity": 0.2,
-                    "width": 1
-                },
+                "line_linked": { "enable": true, "distance": 150, "color": "#4facfe", "opacity": 0.2, "width": 1 },
                 "move": { "enable": true, "speed": 1.5 }
             },
             "interactivity": {
                 "detect_on": "canvas",
-                "events": {
-                    "onhover": { "enable": true, "mode": "grab" },
-                    "onclick": { "enable": true, "mode": "push" }
-                }
+                "events": { "onhover": { "enable": true, "mode": "grab" } }
             }
         });
     </script>
